@@ -2,13 +2,12 @@ import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity,KeyboardAvoidingView,ToastAndroid} from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import {Header} from 'react-native-elements';
-
-import firebase from 'firebase';
 import db from '../config'
+//import firebase from 'firebase'
 
 export default class WriteStoryScreen extends React.Component {
-    constructor(){
-        super()
+    constructor(props){
+        super(props);
         this.state = {
             title: '',
             author: '',
@@ -20,7 +19,8 @@ export default class WriteStoryScreen extends React.Component {
         db.collection("stories").add({
             title: this.state.title,
             author: this.state.author,
-            storyText: this.state.storyText
+            storyText: this.state.storyText,
+            //date: firebase.firestore.FieldValue.serverTimestamp().now().toDate()
         })
         this.setState({
             title: '',
@@ -36,7 +36,7 @@ export default class WriteStoryScreen extends React.Component {
                 <Header 
                     backgroundColor = {'pink'}
                     centerComponent = {{
-                        text : 'Story Hub',
+                        text : 'Bed Time Stories',
                         style : { color: 'white', fontSize: 20}
                     }}
                 />
@@ -89,17 +89,21 @@ const styles = StyleSheet.create({
       height: 40,
       borderWidth: 2,
       marginTop: 40,
-      margin: 10
+      padding: 10,
+      margin:10
   },
   author: {
       height: 40,
       borderWidth: 2,
-      margin: 10
+      padding: 10,
+      margin:10
   },
   storyText: {
       height: 250,
       borderWidth: 2,
-      margin: 10
+      margin: 10,
+      padding:10,
+      paddingTop: 10
   },
   submitButton:{
       justifyContent: 'center',
